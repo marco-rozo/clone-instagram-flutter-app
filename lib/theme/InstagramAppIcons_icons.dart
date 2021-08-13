@@ -12,6 +12,7 @@ class InstagramAppIcons {
 
   static const String _fontFamily = 'InstagramAppIcons';
 
+  static const IconData option_three = IconData(0xe915, fontFamily: _fontFamily);
   static const IconData verified_icon = IconData(0xe913, fontFamily: _fontFamily);
   static const IconData reels_icon = IconData(0xe912, fontFamily: _fontFamily);
   static const IconData messenger_facebook = IconData(0xe910, fontFamily: _fontFamily);
