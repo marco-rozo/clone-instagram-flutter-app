@@ -25,7 +25,6 @@ class _RootAppState extends State<RootApp> with StoryController{
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _getStories();
   }
@@ -44,7 +43,8 @@ class _RootAppState extends State<RootApp> with StoryController{
           children: [
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
-              child: Row(children: <Widget>[
+              child: Row(
+                children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.only(
                         right: 15, left: 8, bottom: 10, top: 8),
@@ -58,22 +58,20 @@ class _RootAppState extends State<RootApp> with StoryController{
                               gradient: LinearGradient(
                                   begin: Alignment.topCenter,
                                   end: Alignment.bottomCenter,
-                                  colors: storyBorderColor)
-                          ),
+                                  colors: storyBorderColor)),
                           child: Padding(
                             padding: const EdgeInsets.all(3.0),
                             child: Container(
                               width: 65,
                               height: 65,
                               decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: black,
-                                      width: 2
-                                  ),
+                                  border: Border.all(color: black, width: 2),
                                   shape: BoxShape.circle,
-                                  image: DecorationImage(image:
-                                  NetworkImage(profile,),fit: BoxFit.cover)
-                              ),
+                                  image: DecorationImage(
+                                      image: NetworkImage(
+                                        profile,
+                                      ),
+                                      fit: BoxFit.cover)),
                             ),
                           ),
                         ),
@@ -92,15 +90,105 @@ class _RootAppState extends State<RootApp> with StoryController{
                       ],
                     ),
                   ),
-                Row(
+                  Row(
                       children: List.generate(stories.length, (index) {
                     return StoryItem(
                       img: stories[index].img,
                       name: stories[index].name,
                     );
                   })),
-                ],),
+                ],
+              ),
             ),
+            Row(
+              children: [
+                Expanded(child: Divider(color: grey))
+              ],
+            ),
+            SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(right: 15, left: 16),
+                        child: Row(
+                          children: [
+                            Container(
+                              width: 36,
+                              height: 36,
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  gradient: LinearGradient(
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomCenter,
+                                      colors: storyBorderColor)),
+                              child: Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: Container(
+                                  width: double.infinity,
+                                  height: double.infinity,
+                                  decoration: BoxDecoration(
+                                      border:
+                                          Border.all(color: black, width: 1),
+                                      shape: BoxShape.circle,
+                                      image: DecorationImage(
+                                          image: NetworkImage(
+                                            "https://images.unsplash.com/profile-1561622789185-efac0f40a024?dpr=1&auto=format&fit=crop&w=150&h=150&q=60&crop=faces&bg=fff",
+                                          ),
+                                          fit: BoxFit.cover)),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 8,
+                            ),
+                            Text("davidboca", style: TextStyle(color: white))
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.only(right: 8),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              IconButton(
+                                icon: Icon(
+                                  InstagramAppIcons.option_three,
+                                  color: white,
+                                ),
+                                onPressed: () {},
+                              )
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(right: 8, left: 8),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                          border: Border.all(color: black, width: 1),
+                          shape: BoxShape.rectangle,
+                          color: Colors.white,
+                          image: DecorationImage(
+                              image: NetworkImage(
+                                "https://images.unsplash.com/photo-1593421189588-d6d731b5749f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=701&q=80",
+                              ),
+                              fit: BoxFit.cover),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            )
           ],
         ),
       ),

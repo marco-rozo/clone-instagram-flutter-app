@@ -5,7 +5,6 @@ void main() {
   runApp(MaterialApp(
     home: RootApp(),
     debugShowCheckedModeBanner: false,
-    themeMode: ThemeMode.dark,
   ));
 }
 
