@@ -91,12 +91,13 @@ class _RootAppState extends State<RootApp> with StoryController{
                     ),
                   ),
                   Row(
-                      children: List.generate(stories.length, (index) {
-                    return StoryItem(
-                      img: stories[index].img,
-                      name: stories[index].name,
-                    );
-                  })),
+                    children: List.generate(stories.length, (index) {
+                      return StoryItem(
+                        img: stories[index].img,
+                        name: stories[index].name,
+                      );
+                    }),
+                  ),
                 ],
               ),
             ),
@@ -169,22 +170,59 @@ class _RootAppState extends State<RootApp> with StoryController{
                       )
                     ],
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(right: 8, left: 8),
-                    child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                          border: Border.all(color: black, width: 1),
-                          shape: BoxShape.rectangle,
-                          color: Colors.white,
-                          image: DecorationImage(
-                              image: NetworkImage(
-                                "https://images.unsplash.com/photo-1593421189588-d6d731b5749f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=701&q=80",
-                              ),
-                              fit: BoxFit.cover),
-                      ),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 400,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: black, width: 1),
+                      shape: BoxShape.rectangle,
+                      color: Colors.white,
+                      image: DecorationImage(
+                          image: NetworkImage(
+                            "https://images.unsplash.com/photo-1593421189588-d6d731b5749f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=701&q=80",
+                          ),
+                          fit: BoxFit.cover),
                     ),
+                  ),
+                  Row(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(right: 15, left: 16, top: 12),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Icon(InstagramAppIcons.love_icon, color: white),
+                            SizedBox(width: 8),
+                            Icon(InstagramAppIcons.comment_icon, color: white),
+                            SizedBox(width: 8),
+                            Icon(InstagramAppIcons.message_icon, color: white),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.only(right: 15, left: 16, top: 12),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Icon(InstagramAppIcons.save_icon, color: white),
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Padding(
+                          padding:
+                              EdgeInsets.only(right: 15, left: 16, top: 12),
+                          child: Text(
+                            "11.593 curtidas",
+                            style: TextStyle(color: white, fontWeight: FontWeight.w600, fontSize: 14),
+                          )),
+                    ],
                   )
                 ],
               ),
