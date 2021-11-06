@@ -1,7 +1,11 @@
+import 'package:clone_instagram/controller/post_controller.dart';
 import 'package:clone_instagram/controller/story_controller.dart';
-import 'package:clone_instagram/data/story_json.dart';
+import 'package:clone_instagram/models/post_model.dart';
+import 'package:clone_instagram/models/story_model.dart';
+// import 'package:clone_instagram/data/story_json.dart';
 import 'package:clone_instagram/theme/colors.dart';
 import 'package:clone_instagram/theme/InstagramAppIcons_icons.dart';
+import 'package:clone_instagram/widgets/post_item.dart';
 import 'package:clone_instagram/widgets/story_item.dart';
 import 'package:flutter/material.dart';
 
@@ -14,11 +18,22 @@ class RootApp extends StatefulWidget {
 
 class _RootAppState extends State<RootApp> with StoryController{
 
-  List stories = [];
+  StoryController storyController = StoryController();
+  PostController postController = PostController();
+
+  List<StoryModel> stories = [];
+  List<PostModel> posts = [];
   _getStories() {
-    getStory().then((value) async {
+    storyController.getStory().then((value) async {
       setState(() {
         stories = value;
+      });
+    });
+  }
+  _getPosts() {
+    postController.getPosts().then((value) async {
+      setState(() {
+        posts = value;
       });
     });
   }
@@ -26,7 +41,12 @@ class _RootAppState extends State<RootApp> with StoryController{
   @override
   void initState() {
     super.initState();
-    _getStories();
+    Future.delayed(const Duration(milliseconds: 10), () {
+      setState(() {
+        _getStories();
+        _getPosts();
+      });
+    });
   }
 
   @override
@@ -58,7 +78,7 @@ class _RootAppState extends State<RootApp> with StoryController{
                               gradient: LinearGradient(
                                   begin: Alignment.topCenter,
                                   end: Alignment.bottomCenter,
-                                  colors: storyBorderColor)),
+                                  colors: circleProfileImgBorderColor)),
                           child: Padding(
                             padding: const EdgeInsets.all(3.0),
                             child: Container(
@@ -101,132 +121,31 @@ class _RootAppState extends State<RootApp> with StoryController{
                 ],
               ),
             ),
-            Row(
-              children: [
-                Expanded(child: Divider(color: grey))
-              ],
-            ),
+            // Row(
+            //   children: [
+            //     Expanded(child: Divider(color: grey, height: 0.0001,))
+            //   ],
+            // ),
             SingleChildScrollView(
               scrollDirection: Axis.vertical,
               child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(right: 15, left: 16),
-                        child: Row(
-                          children: [
-                            Container(
-                              width: 36,
-                              height: 36,
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  gradient: LinearGradient(
-                                      begin: Alignment.topCenter,
-                                      end: Alignment.bottomCenter,
-                                      colors: storyBorderColor)),
-                              child: Padding(
-                                padding: const EdgeInsets.all(2.0),
-                                child: Container(
-                                  width: double.infinity,
-                                  height: double.infinity,
-                                  decoration: BoxDecoration(
-                                      border:
-                                          Border.all(color: black, width: 1),
-                                      shape: BoxShape.circle,
-                                      image: DecorationImage(
-                                          image: NetworkImage(
-                                            "https://images.unsplash.com/profile-1561622789185-efac0f40a024?dpr=1&auto=format&fit=crop&w=150&h=150&q=60&crop=faces&bg=fff",
-                                          ),
-                                          fit: BoxFit.cover)),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 8,
-                            ),
-                            Text("davidboca", style: TextStyle(color: white))
-                          ],
-                        ),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: EdgeInsets.only(right: 8),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              IconButton(
-                                icon: Icon(
-                                  InstagramAppIcons.option_three,
-                                  color: white,
-                                ),
-                                onPressed: () {},
-                              )
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 400,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: black, width: 1),
-                      shape: BoxShape.rectangle,
-                      color: Colors.white,
-                      image: DecorationImage(
-                          image: NetworkImage(
-                            "https://images.unsplash.com/photo-1593421189588-d6d731b5749f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=701&q=80",
-                          ),
-                          fit: BoxFit.cover),
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(right: 15, left: 16, top: 12),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Icon(InstagramAppIcons.love_icon, color: white),
-                            SizedBox(width: 8),
-                            Icon(InstagramAppIcons.comment_icon, color: white),
-                            SizedBox(width: 8),
-                            Icon(InstagramAppIcons.message_icon, color: white),
-                          ],
-                        ),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: EdgeInsets.only(right: 15, left: 16, top: 12),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Icon(InstagramAppIcons.save_icon, color: white),
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Padding(
-                          padding:
-                              EdgeInsets.only(right: 15, left: 16, top: 12),
-                          child: Text(
-                            "11.593 curtidas",
-                            style: TextStyle(color: white, fontWeight: FontWeight.w600, fontSize: 14),
-                          )),
-                    ],
-                  )
-                ],
+                children: List.generate(posts.length, (index) {
+                  return Padding(
+                      padding: EdgeInsets.only(top: 12),
+                      child: PostItem(
+                          name: posts[index].name,
+                          profileImg: posts[index].profileImg,
+                          postImg: posts[index].postImg,
+                          isLoved: posts[index].isLoved,
+                          caption: posts[index].caption,
+                          likedBy: posts[index].likedBy,
+                          likedCount: posts[index].likedCount,
+                          commentCount: posts[index].commentCount,
+                          timeAgo: posts[index].timeAgo)
+                  );
+                }),
               ),
-            )
+            ),
           ],
         ),
       ),
