@@ -6,7 +6,6 @@ class StoryItem extends StatelessWidget {
   final String? name;
   const StoryItem({
     Key? key, this.img, this.name,
-
   }) : super(key: key);
 
   @override
@@ -23,7 +22,7 @@ class StoryItem extends StatelessWidget {
                 gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
-                    colors: storyBorderColor)
+                    colors: circleProfileImgBorderColor)
             ),
             child: Padding(
               padding: const EdgeInsets.all(3.0),

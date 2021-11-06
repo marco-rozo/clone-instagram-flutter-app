@@ -7,16 +7,16 @@ class StoryController {
   //   return dadosJson;
   // }
   Future<List<StoryModel>> getStory() async {
-    List<StoryModel> dadosJson = jsonDecode(jsonEncode(json)).map<StoryModel>((map) {
+    List<StoryModel> dadosJson = jsonDecode(jsonEncode(storyJson)).map<StoryModel>((map) {
       return StoryModel.fromJson(map);
     }).toList();
     return dadosJson;
   }
 
-  var json = [
+  var storyJson = [
     {
       "id": 1,
-      "img": "https://scontent.ffbe2-1.fna.fbcdn.net/v/t1.6435-9/46193022_1176884289146140_3022185224235646976_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=8bfeb9&_nc_ohc=YjAqcJogWtYAX8byc0G&_nc_ht=scontent.ffbe2-1.fna&oh=23e6687abe3a6a3253178561abbc485f&oe=615FC285",
+      "img": "https://images.unsplash.com/photo-1513360371669-4adf3dd7dff8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
       "name": "mayanawillemann"
     },
     {
@@ -47,6 +47,10 @@ class StoryController {
       "name": "psg",
       "verified": true
     },
-
   ];
+  // user profile
+
+  String profile = "https://avatars.githubusercontent.com/u/69606427?v=4";
+// String name = "marco_rozo";
+  String name = "Seu Story";
 }
