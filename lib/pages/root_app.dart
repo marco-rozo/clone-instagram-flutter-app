@@ -2,12 +2,15 @@ import 'package:clone_instagram/controller/post_controller.dart';
 import 'package:clone_instagram/controller/story_controller.dart';
 import 'package:clone_instagram/models/post_model.dart';
 import 'package:clone_instagram/models/story_model.dart';
+import 'package:clone_instagram/service/theme_service.dart';
 // import 'package:clone_instagram/data/story_json.dart';
 import 'package:clone_instagram/theme/colors.dart';
 import 'package:clone_instagram/theme/InstagramAppIcons_icons.dart';
 import 'package:clone_instagram/widgets/post_item.dart';
 import 'package:clone_instagram/widgets/story_item.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class RootApp extends StatefulWidget {
   const RootApp({Key? key}) : super(key: key);
@@ -51,13 +54,14 @@ class _RootAppState extends State<RootApp> with StoryController{
 
   @override
   Widget build(BuildContext context) {
+    print(context.theme.backgroundColor.toString());
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
-        child: getAppBar()
+        child: getAppBar(context)
       ),
-      backgroundColor: black,
-      bottomNavigationBar: getFooter(),
+      backgroundColor: context.theme.backgroundColor,
+      bottomNavigationBar: getFooter(context),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -85,7 +89,7 @@ class _RootAppState extends State<RootApp> with StoryController{
                               width: 65,
                               height: 65,
                               decoration: BoxDecoration(
-                                  border: Border.all(color: black, width: 2),
+                                  border: Border.all(color: context.theme.backgroundColor, width: 2),
                                   shape: BoxShape.circle,
                                   image: DecorationImage(
                                       image: NetworkImage(
@@ -104,7 +108,7 @@ class _RootAppState extends State<RootApp> with StoryController{
                             name,
                             overflow: TextOverflow.ellipsis,
                             textAlign: TextAlign.center,
-                            style: TextStyle(color: white, fontSize: 14),
+                            style: TextStyle(color: context.theme.primaryColor, fontSize: 14),
                           ),
                         ),
                       ],
@@ -153,38 +157,38 @@ class _RootAppState extends State<RootApp> with StoryController{
   }
 }
 
-Widget getFooter() {
+Widget getFooter(BuildContext context) {
   return Container(
     width: double.infinity,
     height: 80,
-    decoration: BoxDecoration(color: black),
+    // decoration: BoxDecoration(color: black),
     child: Row(
       children: [
         Flexible(
           child: Center(
               child: IconButton(
-            icon: Icon(InstagramAppIcons.home_active_icon, color: white),
+            icon: Icon(InstagramAppIcons.home_active_icon),
             onPressed: () {},
           )),
         ),
         Flexible(
           child: Center(
               child: IconButton(
-            icon: Icon(InstagramAppIcons.search_icon, color: white),
+            icon: Icon(InstagramAppIcons.search_icon),
             onPressed: () {},
           )),
         ),
         Flexible(
           child: Center(
               child: IconButton(
-            icon: Icon(InstagramAppIcons.reels_icon, color: white),
+            icon: Icon(InstagramAppIcons.reels_icon),
             onPressed: () {},
           )),
         ),
         Flexible(
           child: Center(
             child: IconButton(
-              icon: Icon(InstagramAppIcons.love_icon, color: white),
+              icon: Icon(InstagramAppIcons.love_icon),
               onPressed: () {},
             ),
           ),
@@ -192,38 +196,73 @@ Widget getFooter() {
         Flexible(
           child: Center(
               child: IconButton(
-            icon: Icon(InstagramAppIcons.account_icon, color: white),
-            onPressed: () {},
-          )),
+            icon: Icon(InstagramAppIcons.account_icon),
+                onPressed: () {
+                  PopupMenuButton(
+                    icon: Icon(Icons.more_vert),
+                    itemBuilder: (BuildContext context) => <PopupMenuEntry>[
+                      const PopupMenuItem(
+                        child: ListTile(
+                          leading: Icon(Icons.add),
+                          title: Text('Item 1'),
+                        ),
+                      ),
+                      const PopupMenuItem(
+                        child: ListTile(
+                          leading: Icon(Icons.anchor),
+                          title: Text('Item 2'),
+                        ),
+                      ),
+                      const PopupMenuItem(
+                        child: ListTile(
+                          leading: Icon(Icons.article),
+                          title: Text('Item 3'),
+                        ),
+                      ),
+                      const PopupMenuDivider(),
+                      const PopupMenuItem(child: Text('Item A')),
+                      const PopupMenuItem(child: Text('Item B')),
+                    ],
+                  );
+                })),
         ),
       ],
     ),
   );
 }
 
-Widget getAppBar(){
+Widget getAppBar(BuildContext context){
+  final isDarkTheme = ThemeService().getTheme();
+
     return AppBar(
-      backgroundColor: black,
+      backgroundColor: context.theme.backgroundColor,
+      bottomOpacity: 0.0,
+      elevation: 0.0,
       title: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Icon(InstagramAppIcons.Instagram_logo, size: 42),
+          Icon(InstagramAppIcons.Instagram_logo, color: context.iconColor, size: 42),
           Expanded(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Padding(
-                padding: EdgeInsets.only(left: 18),
-                child: Icon(InstagramAppIcons.upload_icon, size: 24),
+              IconButton(
+                icon: Icon(isDarkTheme ? Icons.light_mode_outlined : Icons.dark_mode_outlined, color: context.iconColor),
+                onPressed: ThemeService().switchTheme
+                  // print(_box.read(_key));
               ),
               Padding(
                 padding: EdgeInsets.only(left: 18),
-                child: Icon(InstagramAppIcons.love_icon, size: 24),
+                child: Icon(InstagramAppIcons.upload_icon, color: context.iconColor, size: 24),
               ),
               Padding(
                 padding: EdgeInsets.only(left: 18),
-                child: Icon(InstagramAppIcons.messenger_facebook, size: 26, color: white,),
+                child: Icon(InstagramAppIcons.love_icon, color: context.iconColor, size: 24),
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 18),
+                child: Icon(InstagramAppIcons.messenger_facebook, color: context.iconColor, size: 26),
               ),
             ],
           ),

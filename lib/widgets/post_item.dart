@@ -1,6 +1,7 @@
 import 'package:clone_instagram/theme/InstagramAppIcons_icons.dart';
 import 'package:clone_instagram/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class PostItem extends StatelessWidget {
 
@@ -29,6 +30,8 @@ class PostItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color primary = context.theme.primaryColor;
+    Color backgroundColor = context.theme.backgroundColor;
     return Column(
       children: [
       //perfil
@@ -55,7 +58,7 @@ class PostItem extends StatelessWidget {
                       width: double.infinity,
                       height: double.infinity,
                       decoration: BoxDecoration(
-                          border: Border.all(color: black, width: 1),
+                          border: Border.all(color: context.theme.backgroundColor, width: 1),
                           shape: BoxShape.circle,
                           image: DecorationImage(
                               image: NetworkImage(
@@ -68,7 +71,7 @@ class PostItem extends StatelessWidget {
                 SizedBox(
                   width: 8,
                 ),
-                Text(name!, style: TextStyle(color: white))
+                Text(name!, style: TextStyle(color: context.theme.primaryColor))
               ],
             ),
           ),
@@ -81,7 +84,7 @@ class PostItem extends StatelessWidget {
                   IconButton(
                     icon: Icon(
                       InstagramAppIcons.option_three,
-                      color: white,
+                      color: context.theme.primaryColor,
                     ),
                     onPressed: () {},
                   )
@@ -96,9 +99,8 @@ class PostItem extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         height: 400,
         decoration: BoxDecoration(
-          border: Border.all(color: black, width: 1),
           shape: BoxShape.rectangle,
-          color: Colors.white,
+          color: context.theme.primaryColor,
           image: DecorationImage(
               image: NetworkImage(
                 postImg!,
@@ -114,11 +116,11 @@ class PostItem extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                isLoved! ? Icon(InstagramAppIcons.loved_icon, color: redLoved): Icon(InstagramAppIcons.love_icon, color: white),
+                isLoved! ? Icon(InstagramAppIcons.loved_icon, color: redLoved): Icon(InstagramAppIcons.love_icon, color: context.theme.primaryColor),
                 SizedBox(width: 8),
-                Icon(InstagramAppIcons.comment_icon, color: white),
+                Icon(InstagramAppIcons.comment_icon, color: context.theme.primaryColor),
                 SizedBox(width: 8),
-                Icon(InstagramAppIcons.message_icon, color: white),
+                Icon(InstagramAppIcons.message_icon, color: context.theme.primaryColor),
               ],
             ),
           ),
@@ -128,7 +130,7 @@ class PostItem extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Icon(InstagramAppIcons.save_icon, color: white),
+                  Icon(InstagramAppIcons.save_icon, color: context.theme.primaryColor),
                 ],
               ),
             ),
@@ -146,7 +148,7 @@ class PostItem extends StatelessWidget {
                 child: Text(
                   "$likedCount curtidas",
                   style: TextStyle(
-                      color: white, fontWeight: FontWeight.w600, fontSize: 14),
+                      color: context.theme.primaryColor, fontWeight: FontWeight.w600, fontSize: 14),
                 ),
               ),
             ],
@@ -161,12 +163,12 @@ class PostItem extends StatelessWidget {
                       Text(
                         "$name",
                         style: TextStyle(
-                            color: white, fontWeight: FontWeight.w600, fontSize: 14),
+                            color: context.theme.primaryColor, fontWeight: FontWeight.w600, fontSize: 14),
                       ),
                       Text(
                         "$caption",
                         style: TextStyle(
-                            color: white, fontWeight: FontWeight.w400, fontSize: 14),
+                            color: context.theme.primaryColor, fontWeight: FontWeight.w400, fontSize: 14),
                       ),
                     ],
                   )

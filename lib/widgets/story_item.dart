@@ -1,5 +1,6 @@
 import 'package:clone_instagram/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class StoryItem extends StatelessWidget {
   final String? img;
@@ -31,7 +32,7 @@ class StoryItem extends StatelessWidget {
                 height: 65,
                 decoration: BoxDecoration(
                     border: Border.all(
-                        color: black,
+                        color: context.theme.backgroundColor,
                         width: 2
                     ),
                     shape: BoxShape.circle,
@@ -49,7 +50,7 @@ class StoryItem extends StatelessWidget {
               name!,
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
-              style: TextStyle(color: white, fontSize: 14),
+              style: TextStyle(color: context.theme.primaryColor, fontSize: 14),
             ),
           )
         ],
