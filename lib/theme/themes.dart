@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
 
 class Themes {
-  static final light = ThemeData.light().copyWith(
-    backgroundColor: Colors.white,
+  static final darkTheme = ThemeData(
+    primarySwatch: Colors.grey,
     primaryColor: Colors.black,
-    textTheme: TextTheme(
-      bodyText1: TextStyle(),
-      bodyText2: TextStyle(),
-    ).apply(
-      bodyColor: Colors.white,
-      displayColor: Colors.white,
-    ),
-    iconTheme: IconThemeData(color: Colors.black),
-      // buttonColor: Colors.red,
-  );
-  static final dark = ThemeData.dark().copyWith(
+    brightness: Brightness.dark,
     backgroundColor: Colors.black,
+    accentColor: Colors.white,
+    accentIconTheme: IconThemeData(color: Colors.white),
+    dividerColor: Colors.grey,
+    scaffoldBackgroundColor: Colors.black,
+  );
+
+  static final lightTheme = ThemeData(
+    primarySwatch: Colors.grey,
     primaryColor: Colors.white,
-    // buttonColor: Colors.red,
+    brightness: Brightness.light,
+    backgroundColor: Colors.white,
+    accentColor: Colors.black,
+    accentIconTheme: IconThemeData(color: Colors.black),
+    dividerColor: Colors.grey,
+    scaffoldBackgroundColor: Colors.white,
   );
 }

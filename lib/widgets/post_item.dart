@@ -30,8 +30,6 @@ class PostItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color primary = context.theme.primaryColor;
-    Color backgroundColor = context.theme.backgroundColor;
     return Column(
       children: [
       //perfil
@@ -64,14 +62,15 @@ class PostItem extends StatelessWidget {
                               image: NetworkImage(
                                 profileImg!,
                               ),
-                              fit: BoxFit.cover)),
+                              fit: BoxFit.cover),
+                      ),
                     ),
                   ),
                 ),
                 SizedBox(
                   width: 8,
                 ),
-                Text(name!, style: TextStyle(color: context.theme.primaryColor))
+                Text(name!)
               ],
             ),
           ),
@@ -83,8 +82,7 @@ class PostItem extends StatelessWidget {
                 children: [
                   IconButton(
                     icon: Icon(
-                      InstagramAppIcons.option_three,
-                      color: context.theme.primaryColor,
+                      InstagramAppIcons.option_three
                     ),
                     onPressed: () {},
                   )
@@ -100,7 +98,6 @@ class PostItem extends StatelessWidget {
         height: 400,
         decoration: BoxDecoration(
           shape: BoxShape.rectangle,
-          color: context.theme.primaryColor,
           image: DecorationImage(
               image: NetworkImage(
                 postImg!,
@@ -116,11 +113,11 @@ class PostItem extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                isLoved! ? Icon(InstagramAppIcons.loved_icon, color: redLoved): Icon(InstagramAppIcons.love_icon, color: context.theme.primaryColor),
+                isLoved! ? Icon(InstagramAppIcons.loved_icon, color: redLoved): Icon(InstagramAppIcons.love_icon),
                 SizedBox(width: 8),
-                Icon(InstagramAppIcons.comment_icon, color: context.theme.primaryColor),
+                Icon(InstagramAppIcons.comment_icon),
                 SizedBox(width: 8),
-                Icon(InstagramAppIcons.message_icon, color: context.theme.primaryColor),
+                Icon(InstagramAppIcons.message_icon),
               ],
             ),
           ),
@@ -130,7 +127,7 @@ class PostItem extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Icon(InstagramAppIcons.save_icon, color: context.theme.primaryColor),
+                  Icon(InstagramAppIcons.save_icon),
                 ],
               ),
             ),
@@ -147,8 +144,7 @@ class PostItem extends StatelessWidget {
                 padding: EdgeInsets.only(right: 15, left: 16, top: 12),
                 child: Text(
                   "$likedCount curtidas",
-                  style: TextStyle(
-                      color: context.theme.primaryColor, fontWeight: FontWeight.w600, fontSize: 14),
+                  style: TextStyle( fontWeight: FontWeight.w600, fontSize: 14),
                 ),
               ),
             ],
@@ -162,13 +158,11 @@ class PostItem extends StatelessWidget {
                     children: [
                       Text(
                         "$name",
-                        style: TextStyle(
-                            color: context.theme.primaryColor, fontWeight: FontWeight.w600, fontSize: 14),
+                        style: TextStyle( fontWeight: FontWeight.w600, fontSize: 14),
                       ),
                       Text(
                         "$caption",
-                        style: TextStyle(
-                            color: context.theme.primaryColor, fontWeight: FontWeight.w400, fontSize: 14),
+                        style: TextStyle( fontWeight: FontWeight.w400, fontSize: 14),
                       ),
                     ],
                   )

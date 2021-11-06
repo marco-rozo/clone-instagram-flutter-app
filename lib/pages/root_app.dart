@@ -3,14 +3,12 @@ import 'package:clone_instagram/controller/story_controller.dart';
 import 'package:clone_instagram/models/post_model.dart';
 import 'package:clone_instagram/models/story_model.dart';
 import 'package:clone_instagram/service/theme_service.dart';
-// import 'package:clone_instagram/data/story_json.dart';
 import 'package:clone_instagram/theme/colors.dart';
 import 'package:clone_instagram/theme/InstagramAppIcons_icons.dart';
 import 'package:clone_instagram/widgets/post_item.dart';
 import 'package:clone_instagram/widgets/story_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 
 class RootApp extends StatefulWidget {
   const RootApp({Key? key}) : super(key: key);
@@ -54,13 +52,11 @@ class _RootAppState extends State<RootApp> with StoryController{
 
   @override
   Widget build(BuildContext context) {
-    print(context.theme.backgroundColor.toString());
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
         child: getAppBar(context)
       ),
-      backgroundColor: context.theme.backgroundColor,
       bottomNavigationBar: getFooter(context),
       body: SingleChildScrollView(
         child: Column(
@@ -108,7 +104,7 @@ class _RootAppState extends State<RootApp> with StoryController{
                             name,
                             overflow: TextOverflow.ellipsis,
                             textAlign: TextAlign.center,
-                            style: TextStyle(color: context.theme.primaryColor, fontSize: 14),
+                            style: TextStyle(fontSize: 14),
                           ),
                         ),
                       ],
@@ -161,7 +157,6 @@ Widget getFooter(BuildContext context) {
   return Container(
     width: double.infinity,
     height: 80,
-    // decoration: BoxDecoration(color: black),
     child: Row(
       children: [
         Flexible(
@@ -235,34 +230,33 @@ Widget getAppBar(BuildContext context){
   final isDarkTheme = ThemeService().getTheme();
 
     return AppBar(
-      backgroundColor: context.theme.backgroundColor,
       bottomOpacity: 0.0,
       elevation: 0.0,
       title: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Icon(InstagramAppIcons.Instagram_logo, color: context.iconColor, size: 42),
+          Icon(InstagramAppIcons.Instagram_logo, size: 42),
           Expanded(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               IconButton(
-                icon: Icon(isDarkTheme ? Icons.light_mode_outlined : Icons.dark_mode_outlined, color: context.iconColor),
+                icon: Icon(isDarkTheme ? Icons.light_mode_outlined : Icons.dark_mode_outlined),
                 onPressed: ThemeService().switchTheme
                   // print(_box.read(_key));
               ),
               Padding(
                 padding: EdgeInsets.only(left: 18),
-                child: Icon(InstagramAppIcons.upload_icon, color: context.iconColor, size: 24),
+                child: Icon(InstagramAppIcons.upload_icon, size: 24),
               ),
               Padding(
                 padding: EdgeInsets.only(left: 18),
-                child: Icon(InstagramAppIcons.love_icon, color: context.iconColor, size: 24),
+                child: Icon(InstagramAppIcons.love_icon, size: 24),
               ),
               Padding(
                 padding: EdgeInsets.only(left: 18),
-                child: Icon(InstagramAppIcons.messenger_facebook, color: context.iconColor, size: 26),
+                child: Icon(InstagramAppIcons.messenger_facebook, size: 26),
               ),
             ],
           ),
